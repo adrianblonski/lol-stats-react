@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import SiteNavbar from './components/navbar/main';
+import HomePage from './pages/home';
 
 class App extends Component {
 
@@ -9,9 +12,10 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Router>
         <SiteNavbar onSearch={this.onSearch} />
-      </div>
+        <Route exact path="/" component={HomePage} />
+      </Router>
     );
   }
 }
