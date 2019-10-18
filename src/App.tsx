@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import SiteNavbar from './components/navbar/main';
 import HomePage from './pages/home';
+import Stats from './pages/stats';
 
 class App extends Component {
 
-  onSearch = (id: number, server: string) => {
-    console.log(id + ", " + server);
+  onSearch = (server: string, name: string) => {
+    window.location.href = `/stats/${server}/${name}`;
   }
 
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
       <Router>
         <SiteNavbar onSearch={this.onSearch} />
         <Route exact path="/" component={HomePage} />
+        <Route path="/stats/:server/:name" component={Stats} />
       </Router>
     );
   }

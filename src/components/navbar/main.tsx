@@ -4,7 +4,7 @@ import ComboBox from './combobox';
 import './style.css';
 
 interface Props {
-  onSearch: (server: number, name: string) => void
+  onSearch: (server: string, name: string) => void
 }
 
 interface State {
@@ -38,7 +38,7 @@ class SiteNavbar extends Component<Props, State> {
   onSearchClick = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const inputValue = this.summonerRef.current.value;
-    this.props.onSearch(this.state.server, inputValue);
+    this.props.onSearch(serverNames[this.state.server], inputValue);
     this.setState({
       name: inputValue,
       server: this.state.server
@@ -56,7 +56,7 @@ class SiteNavbar extends Component<Props, State> {
         </div>
         <form onSubmit={this.onSearchClick} className="frm-search">
           <ComboBox options={serverNames} onChange={this.onServerChange} />
-          <input type="text" ref={this.summonerRef} />
+          <input type="text" ref={this.summonerRef} placeholder="Summoner Name..." />
           <input type="submit" value="GO" />
         </form>
       </div>
