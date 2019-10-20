@@ -5,7 +5,7 @@ class HomePage extends Component {
   render() {
     return (
       <div className="home-container">
-        <div className="img-teemo">
+        <div className="img-background">
           <img src={Teemo} alt="Teemo :D" />
         </div>
       </div>

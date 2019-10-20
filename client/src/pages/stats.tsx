@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import league from '../interfaces/league';
+import summoner from '../interfaces/summoner';
 
 import '../components/stats/style.css';
 
 import AccountStats from '../components/stats/account';
 import RankedStats from '../components/stats/ranked';
+import NotFound from './notfound';
 
 interface RouteInfo {
   server: string,
@@ -18,43 +19,55 @@ interface Props extends RouteComponentProps<RouteInfo> {
   name: string
 }
 
-interface State {
-  version: string,
-  name: string,
-  level: number,
-  image: string,
-  soloq: league,
-  flexq: league
-}
-
-class Stats extends Component<Props, State> {
+class Stats extends Component<Props, summoner> {
   constructor(props: Props) {
     super(props);
 
     this.state = {
       version: '9.20.1',
-      name: 'KLAPKI W LESIE',
+      name: '',
       level: 0,
-      image: '1112',
+      image: '1',
       soloq: {
-        league: 'gold',
-        division: 2,
-        lp: 15,
-        wins: 10,
-        loses: 3
+        league: '',
+        division: 0,
+        lp: 0,
+        wins: 0,
+        loses: 0
       },
       flexq: {
-        league: 'diamond',
-        division: 1,
-        lp: 22,
-        wins: 44,
-        loses: 12
+        league: '',
+        division: 0,
+        lp: 0,
+        wins: 0,
+        loses: 0
       }
     };
   }
 
+  getResponse = async() => {
+    const response = await fetch(`/api/${this.props.match.params.server}/${this.props.match.params.name}`);
+    const body = await response.json();
+    if(response.status !== 200) throw Error(body.message);
+
+    return body;
+  }
+
+  componentDidMount() {
+    this.getResponse()
+      .then(res => {
+        if(res.err){
+          const temp = JSON.parse(JSON.stringify(this.state));
+          temp.level = -1;
+          this.setState(temp);
+        } else this.setState(res);
+      })
+  }
+
   render() {
-    return (
+    if(this.state.level === -1)
+      return (<NotFound />);
+    else return (
       <div className="stats-container">
         <AccountStats 
           version={this.state.version} 
