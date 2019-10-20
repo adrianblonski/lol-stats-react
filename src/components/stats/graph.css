@@ -1,0 +1,14 @@
+.graph {
+    position: relative;
+    min-width: 200px;
+    min-height: 30px;
+    background-color: #ee5a52;
+    border: 1px solid #879292;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.graph-wins {
+    min-height: 30px;
+    background-color: #1f8ecd;
+}

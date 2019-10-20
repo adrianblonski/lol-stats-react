@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import SiteNavbar from './components/navbar/main';
 import HomePage from './pages/home';
@@ -15,8 +15,10 @@ class App extends Component {
     return (
       <Router>
         <SiteNavbar onSearch={this.onSearch} />
-        <Route exact path="/" component={HomePage} />
-        <Route path="/stats/:server/:name" component={Stats} />
+        <Switch>
+          <Route exact path="/stats/:server/:name" component={Stats} />
+          <Route component={HomePage} />
+        </Switch>
       </Router>
     );
   }

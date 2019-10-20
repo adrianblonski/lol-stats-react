@@ -45,6 +45,9 @@
 }
 
 .frm-search input[type="text"] {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+
     border: none;
     outline: none;
     height: 30px;
@@ -56,6 +59,9 @@
 }
 
 .frm-search input[type="submit"] {
+    -webkit-appearance: none;
+    appearance: none;
+
     height: 30px;
     font-size: 18px;
     font-weight: bold;
@@ -72,19 +78,13 @@
 @media screen and (max-width:768px){
     .logo-small {
         display: block;
-        margin-left: 5%;
-        color: #eeeeee;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        font-size: 30px;
     }
     
     .logo{
         display: none;
-        margin-left: 5%;
-        color: #eeeeee;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        font-size: 30px;
+    }
+
+    .frm-search input[type="text"] {
+        width: 47%;
     }
 }
